@@ -2,8 +2,8 @@
   roles:
     - role: bindep
       bindep_profile: test
-      bindep_dir: "src/{{ zuul.project.canonical_name }}"
+      bindep_dir: "{{ zuul.build }}/src/{{ zuul.project.canonical_name }}"
     - role: bindep
       bindep_profile: test
-      bindep_dir: src/opendev.org/openstack/releases
+      bindep_dir: "{{ zuul.build }}/src/opendev.org/openstack/releases"
     - revoke-sudo

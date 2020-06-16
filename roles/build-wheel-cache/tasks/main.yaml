@@ -19,3 +19,4 @@
 
 - name: Build the wheel mirror
   script: wheel-build.sh {{ wheel_dir }} {{ wheel_python }}
+  chdir: "{{ zuul.build }}"

@@ -30,7 +30,7 @@
     roles:
       - zuul: zuul/zuul-jobs
     vars:
-      constraints_file: '{{ ansible_user_dir }}/src/opendev.org/openstack/requirements/upper-constraints.txt'
+      constraints_file: '{{ ansible_user_dir }}/{{ zuul.build }}/src/opendev.org/openstack/requirements/upper-constraints.txt'
 
 - job:
     name: tox-py35-on-zuul
@@ -39,7 +39,7 @@
     description: |
       Run zuul's py35 unittests on patches to zuul-jobs.
     vars:
-      zuul_work_dir: src/opendev.org/zuul/zuul
+      zuul_work_dir: "{{ zuul.build }}/src/opendev.org/zuul/zuul"
     required-projects:
       - zuul/zuul
 
@@ -55,7 +55,7 @@
     required-projects:
       - name: openstack/requirements
     vars:
-      tox_constraints_file: '{{ ansible_user_dir }}/src/opendev.org/openstack/requirements/upper-constraints.txt'
+      tox_constraints_file: '{{ ansible_user_dir }}/{{ zuul.build }}/src/opendev.org/openstack/requirements/upper-constraints.txt'
 
 - job:
     name: openstack-tox
@@ -78,7 +78,7 @@
     required-projects:
       - name: openstack/requirements
     vars:
-      tox_constraints_file: '{{ ansible_user_dir }}/src/opendev.org/openstack/requirements/upper-constraints.txt'
+      tox_constraints_file: '{{ ansible_user_dir }}/{{ zuul.build }}/src/opendev.org/openstack/requirements/upper-constraints.txt'
 
 - job:
     name: openstack-tox-with-sudo
@@ -230,7 +230,7 @@
     irrelevant-files: *common-irrelevant-files
     success-url: cover/
     vars:
-      tox_constraints_file: '{{ ansible_user_dir }}/src/opendev.org/openstack/requirements/upper-constraints.txt'
+      tox_constraints_file: '{{ ansible_user_dir }}/{{ zuul.build }}/src/opendev.org/openstack/requirements/upper-constraints.txt'
     timeout: 3000
 
 - job:
@@ -250,7 +250,7 @@
     irrelevant-files: *common-irrelevant-files
     success-url: cover/
     vars:
-      tox_constraints_file: '{{ ansible_user_dir }}/src/opendev.org/openstack/requirements/upper-constraints.txt'
+      tox_constraints_file: '{{ ansible_user_dir }}/{{ zuul.build }}/src/opendev.org/openstack/requirements/upper-constraints.txt'
     timeout: 3000
     branches:
       - stable/ocata
@@ -431,7 +431,7 @@
     required-projects:
       - name: openstack/requirements
     vars:
-      tox_constraints_file: '{{ ansible_user_dir }}/src/opendev.org/openstack/requirements/upper-constraints.txt'
+      tox_constraints_file: '{{ ansible_user_dir }}/{{ zuul.build }}/src/opendev.org/openstack/requirements/upper-constraints.txt'
       bindep_profile: compile doc
       tox_envlist: docs
       tox_pdf_envlist: pdf-docs
@@ -456,7 +456,7 @@
     required-projects:
       - name: openstack/requirements
     vars:
-      tox_constraints_file: '{{ ansible_user_dir }}/src/opendev.org/openstack/requirements/upper-constraints.txt'
+      tox_constraints_file: '{{ ansible_user_dir }}/{{ zuul.build }}/src/opendev.org/openstack/requirements/upper-constraints.txt'
       tox_envlist: docs
       bindep_profile: compile doc
     nodeset: ubuntu-xenial
@@ -639,7 +639,7 @@
     required-projects:
       - name: openstack/requirements
     vars:
-      constraints_file: '{{ ansible_user_dir }}/src/opendev.org/openstack/requirements/upper-constraints.txt'
+      constraints_file: '{{ ansible_user_dir }}/{{ zuul.build }}/src/opendev.org/openstack/requirements/upper-constraints.txt'
 
 - job:
     name: build-openstack-api-ref
@@ -1072,7 +1072,7 @@
     vars:
       tox_envlist: linters
       tox_environment:
-        ANSIBLE_ROLES_PATH: ~/src/opendev.org/opendev/base-jobs/roles:~/src/opendev.org/zuul/zuul-jobs/roles:~/src/opendev.org/openstack/openstack-zuul-jobs/roles:~/src/opendev.org/openstack/project-config/roles:~/src/opendev.org/opendev/system-config/roles
+        ANSIBLE_ROLES_PATH: "~/{{ zuul.build }}/src/opendev.org/opendev/base-jobs/roles:~/src/{{ zuul.build }}/opendev.org/zuul/zuul-jobs/roles:~/src/{{ zuul.build }}/opendev.org/openstack/openstack-zuul-jobs/roles:~/{{ zuul.build }}/src/opendev.org/openstack/project-config/roles:~/{{ zuul.build }}/src/opendev.org/opendev/system-config/roles"
 
 - job:
     name: ansible-role-functional-base
