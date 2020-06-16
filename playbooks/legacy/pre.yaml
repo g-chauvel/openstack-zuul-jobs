@@ -2,6 +2,9 @@
   roles:
     - role: fetch-zuul-cloner
       destination: "/usr/zuul-env/bin/zuul-cloner"
+      # does this need to be update to:
+      # repo_src_dir: "{{ ansible_user_dir }}/{{ zuul.build }}/src/opendev.org"
+      # due to https://review.opendev.org/#/q/Ib78ce4272995680f37ddede73fe6622bcb5c9443
       repo_src_dir: "/home/zuul/src/opendev.org"
     - legacy-copy-jenkins-scripts
 
